@@ -19,7 +19,9 @@ $(document).ready(function () {
         //grab user input
         var trainName = $("#inputName").val().trim();
         var trainDest = $("#inputDestination").val();
-        var trainFirst = moment($("#inputTime").val(), "HH:mm").format("X");
+        var trainFirst = moment($("#inputTime").val(), "HH:mm").format("HH:mm");
+        console.log(trainFirst);
+
         var trainFreq = $("#inputFrequency").val();
 
         console.log(trainName);
@@ -56,7 +58,7 @@ $(document).ready(function () {
 
 
         //Prettify   EMPLOYEE START
-        var tFrequency = 15;
+        var tFrequency = trainFreq;
 
         // Time is 3:30 AM
         var firstTime = "03:30";
@@ -88,12 +90,15 @@ $(document).ready(function () {
         // // // Minute Until Train
         var tMinutesTillTrain = tFrequency - tRemainder;
         console.log("MINUTES TILL TRAIN: " + tMinutesTillTrain);
+        var nextTrain = moment().add(tMinutesTillTrain, "minutes").format("HH:mm")
+        console.log(nextTrain);
+
 
         var newRow = $("<tr>").append(
             $('<td>').text(trainName),
             $('<td>').text(trainDest),
             $('<td>').text(trainFirst),
-            $('<td>').text(trainFreq),
+            $('<td>').text(nextTrain),
             $('<td>').text(tMinutesTillTrain)
         );
 
